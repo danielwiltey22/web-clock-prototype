@@ -1,0 +1,263 @@
+:root {
+  --bg: #0e1117;
+  --panel: rgba(18, 22, 30, 0.85);
+  --text: #e6e6e6;
+  --muted: rgba(230,230,230,0.6);
+  --stroke: rgba(230,230,230,0.15);
+  --accent: #ff3b30;
+  --ok: #2dd4bf;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+
+body {
+  margin: 0;
+  background: radial-gradient(1100px 700px at 50% 10%, #151c2c 0%, var(--bg) 55%, #07080b 100%);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  display: grid;
+  place-items: center;
+}
+
+.wrap {
+  width: min(1000px, 92vw);
+  padding: 26px 18px;
+  display: grid;
+  gap: 18px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.digitalWrap { display: grid; gap: 6px; }
+.digital {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: clamp(38px, 6vw, 58px);
+  letter-spacing: 0.04em;
+}
+.date { color: var(--muted); }
+
+.controls { display: flex; gap: 10px; align-items: center; }
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+}
+.toggle input { display: none; }
+.pill {
+  width: 54px; height: 30px;
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  position: relative;
+}
+.pill::after {
+  content: "";
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.9);
+  position: absolute;
+  top: 50%; left: 4px;
+  transform: translateY(-50%);
+  transition: left 160ms ease;
+}
+.toggle input:checked + .pill::after { left: 28px; }
+.labelText { color: var(--muted); font-size: 14px; }
+
+.clockRow {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+@media (max-width: 860px) {
+  .clockRow { grid-template-columns: 1fr; }
+}
+
+.analog { width: 340px; max-width: 80vw; aspect-ratio: 1/1; }
+.face {
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--stroke);
+  position: relative;
+  background: rgba(255,255,255,0.03);
+}
+
+.hand {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform-origin: bottom center;
+  border-radius: 999px;
+}
+.hand.hour { width: 6px; height: 26%; background: var(--text); opacity: 0.95; }
+.hand.minute { width: 4px; height: 36%; background: var(--text); opacity: 0.9; }
+.hand.second { width: 2px; height: 43%; background: var(--accent); }
+
+.pin {
+  position: absolute;
+  width: 10px; height: 10px;
+  background: var(--text);
+  border-radius: 50%;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 16px 60px rgba(0,0,0,0.35);
+}
+
+.panel h2 {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+}
+
+.alarmForm { display: grid; gap: 10px; }
+.row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 520px) {
+  .row { grid-template-columns: 1fr; }
+}
+
+label { display: grid; gap: 6px; font-size: 13px; color: var(--muted); }
+input[type="time"], input[type="text"] {
+  border: 1px solid var(--stroke);
+  background: rgba(0,0,0,0.2);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  outline: none;
+}
+.check { display: inline-flex; align-items: center; gap: 10px; }
+.check input { transform: translateY(1px); }
+
+.btn {
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,0.08);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.btn:hover { background: rgba(255,255,255,0.12); }
+.btn.ghost { background: transparent; }
+.btn.danger { border-color: rgba(255, 59, 48, 0.35); background: rgba(255, 59, 48, 0.15); }
+
+.hint { margin: 0; color: var(--muted); font-size: 12px; }
+
+.alarmList {
+  list-style: none;
+  padding: 0;
+  margin: 14px 0 0 0;
+  display: grid;
+  gap: 10px;
+}
+.alarmItem {
+  border: 1px solid var(--stroke);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: center;
+  background: rgba(0,0,0,0.15);
+}
+.alarmMain { display: grid; gap: 2px; }
+.alarmTime { font-family: ui-monospace, monospace; font-size: 16px; letter-spacing: 0.02em; }
+.alarmLabel { color: var(--muted); font-size: 12px; }
+.alarmActions { display: inline-flex; gap: 8px; align-items: center; }
+.smallBtn {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--stroke);
+  background: rgba(255,255,255,0.06);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 12px;
+}
+.smallBtn:hover { background: rgba(255,255,255,0.1); }
+.badge {
+  font-size: 11px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--stroke);
+  color: var(--muted);
+}
+.badge.on { color: #b6fff4; border-color: rgba(45,212,191,0.35); background: rgba(45,212,191,0.12); }
+
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  background: rgba(0,0,0,0.55);
+}
+.modal.show { display: grid; }
+.modalCard {
+  width: min(420px, 92vw);
+  background: rgba(18, 22, 30, 0.95);
+  border: 1px solid var(--stroke);
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 20px 80px rgba(0,0,0,0.6);
+}
+.modalTitle { font-weight: 700; margin-bottom: 8px; }
+.modalBody { color: var(--muted); margin-bottom: 14px; }
+.modalActions { display: flex; gap: 10px; justify-content: flex-end; }
+.footer {
+  margin-top: 28px;
+  text-align: center;
+  color: rgba(230, 230, 230, 0.65);
+  display: grid;
+  gap: 6px;
+}
+
+.footer-main {
+  font-size: 14px;
+  letter-spacing: 0.04em;
+}
+
+.footer-sub {
+  font-size: 12px;
+  opacity: 0.85;
+}
+
+.footer-date {
+  font-size: 11px;
+  opacity: 0.6;
+}
+.numbers {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.clock-number {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 16px;
+  color: rgba(230, 230, 230, 0.9);
+}
+
+.clock-number.small {
+  font-size: 15px;
+  opacity: 0.9;
+}

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Clock App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header class="top">
+      <div class="digitalWrap">
+        <div class="digital" id="digital">--:--:--</div>
+        <div class="date" id="dateLine">---</div>
+      </div>
+
+      <div class="controls">
+        <label class="toggle">
+          <input type="checkbox" id="enableSoundToggle" />
+          <span class="pill"></span>
+          <span class="labelText" id="enableSoundLabel">Sound Off</span>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" id="fmtToggle" />
+          <span class="pill"></span>
+          <span class="labelText" id="fmtLabel">12-hour</span>
+        </label>
+        <label style="display:inline-flex;align-items:center;gap:8px;color:var(--muted);">
+          <input type="color" id="colorPicker" value="#ff3b30" title="Clock color">
+        </label>
+      </div>
+    </header>
+
+    <section class="clockRow">
+      <div class="analog">
+        <div class="face" id="face">
+        <div class="numbers" id="numbers"></div>
+          <div class="hand hour" id="hour"></div>
+          <div class="hand minute" id="minute"></div>
+          <div class="hand second" id="second"></div>
+          <div class="pin"></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>Alarms</h2>
+
+        <form id="alarmForm" class="alarmForm">
+          <div class="row">
+            <label>
+              Time
+              <input type="time" id="alarmTime" required />
+            </label>
+
+            <label>
+              Label
+              <input type="text" id="alarmLabel" placeholder="Wake up" maxlength="24" />
+            </label>
+          </div>
+
+          <div class="row">
+            <label class="check">
+              <input type="checkbox" id="alarmEnabled" checked />
+              Enabled
+            </label>
+
+            <button type="submit" class="btn">Add Alarm</button>
+          </div>
+
+          <p class="hint">Tip: keep this tab open for alarms to ring.</p>
+        </form>
+
+        <ul class="alarmList" id="alarmList"></ul>
+      </div>
+    </section>
+
+    <!-- Alarm modal -->
+    <div class="modal" id="modal" aria-hidden="true">
+      <div class="modalCard">
+        <div class="modalTitle">⏰ Alarm</div>
+        <div class="modalBody" id="modalBody">Alarm!</div>
+        <div class="modalActions">
+          <button class="btn ghost" id="snoozeBtn">Snooze 5m</button>
+          <button class="btn danger" id="stopBtn">Stop</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tiny embedded beep (no external files needed) -->
+    <audio id="beep" preload="auto">
+      <source src="data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQAAAAA=" type="audio/wav">
+    </audio>
+  </main>
+  <footer class="footer">
+    <div class="footer-main">Built By: Daniel P. Wiltey</div>
+    <div class="footer-sub">Built in Bay Area, CA for learning purposes.</div>
+    <div class="footer-date">1/15/2026</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
